@@ -2,6 +2,7 @@
     "name": "misakstvanu/laravel-probe-endpoints",
     "description": "Personal probe endpoints for Laravel apps",
     "type": "library",
+    "version": "1.0.0",
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.0"
