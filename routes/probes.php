@@ -2,19 +2,18 @@ use Illuminate\Support\Facades\Route;
 
 <?php
 
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+
 Route::prefix(config('probes.prefix'))->group(function() {
     Route::get('/probe/liveness', function () {
         return response()->json(['status' => 'ok']);
     });
 
     Route::get('/probe/readiness', function () {
-        // Add your readiness checks here
-        $isReady = true;
+        DB::connection()->getPdo();
+        Cache::put('readiness_test', 1, 1);
 
-        if ($isReady) {
-            return response()->json(['status' => 'ok']);
-        } else {
-            return response()->json(['status' => 'not ready'], 503);
-        }
+        return response()->json(['status' => 'ok']);
     });
 });
