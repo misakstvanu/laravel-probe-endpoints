@@ -9,7 +9,7 @@ Route::prefix(config('probes.prefix'))->group(function() {
     });
 
     Route::get('/probe/ready', function () {
-        DB::connection()->getPdo();
+        DB::connection()->getPdo()->query('SELECT 1');;
         Cache::put('readiness_test', 1, 1);
 
         return response()->json(['status' => 'ok']);
